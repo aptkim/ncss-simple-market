@@ -12,14 +12,24 @@ class OrderBook:
         Insert the specified order into the order book, by adding it to the
         back of the queue for its side and price.
         """
-        pass
+        assert order.orderid not in self._orders, "Order ID already exists in book"
+        self._orders[order.orderid] = order
+
+        book_side = self._book_side(order.side)
+        if order.price not in book_side:
+            book_side[order.price] = Queue()
+        book_side[order.price].enqueue(order)
 
     def delete(self, orderid):
         """
         Remove the specified order from the order book, if it exists,
         regardless of its place in the queue.
         """
-        pass
+        if orderid not in self._orders:
+            return
+
+        order = self._orders.pop(orderid)
+        self._book_side(order.side)[order.price].remove(order)
 
     def prices(self, side):
         """
@@ -29,7 +39,9 @@ class OrderBook:
         sorted in descending order. If set to Side.SELL, the prices will be
         sorted in ascending order.
         """
-        pass
+        book_side = self._book_side(side)
+        reverse = True if side == Side.BUY else False
+        return sorted(book_side.keys(), reverse=reverse)
 
     def buys(self):
         """
@@ -40,7 +52,11 @@ class OrderBook:
         Price time priority for buy orders is sorted firstly by price (most to
         least expensive) then time (least to most recently inserted).
         """
-        pass
+        result = Queue()
+        for price in self.prices(Side.BUY):
+            for item in self._buys[price].items():
+                result.enqueue(item)
+        return result
 
     def sells(self):
         """
@@ -51,13 +67,19 @@ class OrderBook:
         Price time priority for sell orders is sorted firstly by price (least
         to most expensive) then time (least to most recently inserted).
         """
-        pass
+        result = Queue()
+        for price in self.prices(Side.SELL):
+            for item in self._sells[price].items():
+                result.enqueue(item)
+        return result
 
     def _book_side(self, side):
         """
         Return the specified side of the order book.
         """
-        pass
+        if side == Side.BUY:
+            return self._buys
+        return self._sells
 
     def __str__(self):
         """

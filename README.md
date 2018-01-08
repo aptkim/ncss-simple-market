@@ -1,7 +1,3 @@
 # ncss-text-market
 
-Run the unit tests and fill out the Exchange class until the tests are all passing.
-
-```
-python -m unittest discover
-```
+Convert the Exchange class to act as a single threaded network server using an event loop. Design and generate a structured protocol using Google protocol buffers.

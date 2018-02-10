@@ -36,12 +36,12 @@ git checkout exercise-02
 ```
  - The branch includes an incomplete implementation of an OrderBook class provided in textmarket/orderbook.py.
  - Unit tests describing how the OrderBook class should behave are in test/test_orderbook.py.
- - Some additional classes that the OrderBook will need -- including Order and Side -- are in test/test_markettypes.py.
+ - Some additional classes that the OrderBook will need -- including Order and Side -- are in textmarket/markettypes.py.
  - Run the unit tests, most of which will be failing (refer to the tips on the master branch if you are new to running Python unit tests):
 ```
 python -m unittest discover
 ```
- - Your task is to complete each empty function in the OrderBook class by replacing `pass` with the code that will carry out the behaviour described in the function comment  until **all unit tests are passing**. For example, the `insert` class will need to insert the specified order into the order book:
+ - Your task is to complete each empty function in the OrderBook class by replacing `pass` with the code that will carry out the behaviour described in the function comment  until **all unit tests are passing**. For example, the `insert` function will need to insert the specified order into the order book:
 ```
     def insert(self, order):
         """

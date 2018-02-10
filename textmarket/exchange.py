@@ -6,6 +6,11 @@ from queue import Queue
 
 class Exchange:
     def __init__(self):
+        """
+        self._clients maps a client ID to the corresponding client object.
+        self.trades is a list of all trades that have occurred.
+        self.order_book is an order book for one instrument.
+        """
         self._clients = {}
         self.trades = []
         self.order_book = OrderBook()

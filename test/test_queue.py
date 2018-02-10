@@ -12,6 +12,10 @@ class TestQueue(unittest.TestCase):
         q = Queue([1, 2, 3])
         self.assertEqual(q.size(), 3)
 
+    def test_peek_when_empty(self):
+        q = Queue()
+        self.assertEqual(q.peek(), None)
+
     def test_peek_does_not_remove(self):
         q = Queue([23, 14])
         self.assertEqual(q.peek(), 23)

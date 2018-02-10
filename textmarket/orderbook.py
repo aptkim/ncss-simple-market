@@ -3,6 +3,11 @@ from queue import Queue
 
 class OrderBook:
     def __init__(self):
+        """
+        self._orders maps an order ID to the corresponding order object.
+        self._buys maps a buy price to a Queue of buy orders at that price.
+        self._sells maps a sell price to a Queue of sell orders at that price.
+        """
         self._orders = {}
         self._buys = {}
         self._sells = {}
@@ -80,26 +85,3 @@ class OrderBook:
         if side == Side.BUY:
             return self._buys
         return self._sells
-
-    def __str__(self):
-        """
-        Return a string representation of the order book, with prices ordered
-        vertically down the middle from most to least expensive, with sells on
-        the right side ordering oldest to newest from left to right, and
-        buys on the left side ordering oldest to newest from right to left.
-        
-        Example:
-
-                                          7.5     4323054728:10
-                                          7.0     4323054800:20, 4323054872:10
-          4323054584:20, 4323054368:10    4.5    
-                         4323054656:15    4.0    
-        """
-        s = []
-        for i in sorted(self._sells, reverse=True):
-            order_str = ["{0.orderid}:{0.volume}".format(order) for order in self._sells[i].items()]
-            s.append("{0:50} {price:^10} {orders}".format("", price=i, orders=", ".join(order_str)))
-        for i in sorted(self._buys, reverse=True):
-            order_str = ["{0.orderid}:{0.volume}".format(order) for order in self._buys[i].items(reverse=True)]
-            s.append("{orders:>50} {price:^10}".format(price=i, orders=", ".join(order_str)))
-        return "\n".join(s) + "\n"

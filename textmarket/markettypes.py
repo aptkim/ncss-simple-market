@@ -13,9 +13,6 @@ class Client:
         self.clientid = id(self)
         self.name = name
         self.orders = []
-        
-    def __str__(self):
-        return "{self.name} ({self.clientid})".format(self=self)
 
 class Order:
     """
@@ -33,10 +30,6 @@ class Order:
         self.price = price
         self.volume = volume
 
-    def __str__(self):
-        side_str = "B" if self.side == Side.BUY else "S"
-        return "{side} {self.price}@{self.volume}".format(side=side_str, self=self)
-
 class Trade:
     """
     A trade is what occurs when two orders have been matched.
@@ -48,6 +41,3 @@ class Trade:
         self.seller = seller
         self.price = price
         self.volume = volume
-
-    def __str__(self):
-        return "[{self.timestamp}] {self.buyer} {self.price}@{self.volume} {self.seller}".format(self=self)

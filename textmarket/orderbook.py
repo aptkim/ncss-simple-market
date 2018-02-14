@@ -1,5 +1,5 @@
-from markettypes import Side, Order
-from queue import Queue
+from .markettypes import Side, Order
+from .queue import Queue
 
 class OrderBook:
     def __init__(self):
@@ -29,7 +29,7 @@ class OrderBook:
     def prices(self, side):
         """
         Return a new list of the prices for the specified side of the book.
-        
+
         side is a required argument. If set to Side.BUY, the prices will be
         sorted in descending order. If set to Side.SELL, the prices will be
         sorted in ascending order.
@@ -41,7 +41,7 @@ class OrderBook:
         Return a new Queue of all buy orders in the order book. The first item
         in the queue will have the highest price time priority, and the last
         item will have the lowest priority.
-        
+
         Price time priority for buy orders is sorted firstly by price (most to
         least expensive) then time (least to most recently inserted).
         """
@@ -52,7 +52,7 @@ class OrderBook:
         Return a new Queue of all sell orders in the order book. The first item
         in the queue will have the highest price time priority, and the last
         item will have the lowest priority.
-        
+
         Price time priority for sell orders is sorted firstly by price (least
         to most expensive) then time (least to most recently inserted).
         """

@@ -5,27 +5,42 @@ from textmarket.orderbook import OrderBook
 
 class TestOrderBook(unittest.TestCase):
 
+    def assertItemsEqual(self, iterable_a, iterable_b):
+        """
+        Takes two iterable objects and checks that all
+        items are equal.
+        """
+
+        # Hopefully your iterables are finite
+        list_a = [a for a in iterable_a]
+        list_b = [b for b in iterable_b]
+
+        self.assertEqual(len(list_a), len(list_b), 'List lengths must be equal.')
+
+        for a, b in zip(list_a, list_b):
+            self.assertEqual(a, b, '{} != {}. List elements must be equal.'.format(a, b))
+
     def test_new_order_book_is_empty(self):
         ob = OrderBook()
-        self.assertEquals(ob.buys().size(), 0)
-        self.assertEquals(ob.sells().size(), 0)
+        self.assertEqual(ob.buys().size(), 0)
+        self.assertEqual(ob.sells().size(), 0)
 
     def test_insert_buy_order(self):
         ob = OrderBook()
         buy = Order(0, Side.BUY, 4.5, 10)
-        
+
         ob.insert(buy)
-        self.assertEquals(ob.buys().size(), 1)
-        self.assertEquals(ob.buys().peek(), buy)
+        self.assertEqual(ob.buys().size(), 1)
+        self.assertEqual(ob.buys().peek(), buy)
 
     def test_insert_sell_order(self):
         ob = OrderBook()
         sell = Order(0, Side.SELL, 7.5, 10)
-        
+
         ob.insert(sell)
-        self.assertEquals(ob.sells().size(), 1)
-        self.assertEquals(ob.sells().peek(), sell)
-        
+        self.assertEqual(ob.sells().size(), 1)
+        self.assertEqual(ob.sells().peek(), sell)
+
     def test_cannot_insert_same_order_twice(self):
         """
         The same instance of an order may not be inserted more than once.
@@ -34,12 +49,12 @@ class TestOrderBook(unittest.TestCase):
         ob = OrderBook()
         b1 = Order(0, Side.BUY, 4.5, 10)
         b2 = Order(0, Side.BUY, 4.5, 10)
-        
+
         ob.insert(b1)
         self.assertRaises(AssertionError, ob.insert, b1)
 
         ob.insert(b2)
-        self.assertEquals(ob.buys().size(), 2)
+        self.assertEqual(ob.buys().size(), 2)
 
     def test_delete_buy_order(self):
         ob = OrderBook()
@@ -47,7 +62,7 @@ class TestOrderBook(unittest.TestCase):
         
         ob.insert(buy)
         ob.delete(buy.orderid)
-        self.assertEquals(ob.buys().size(), 0)
+        self.assertEqual(ob.buys().size(), 0)
 
     def test_delete_sell_order(self):
         ob = OrderBook()
@@ -55,7 +70,7 @@ class TestOrderBook(unittest.TestCase):
         
         ob.insert(sell)
         ob.delete(sell.orderid)
-        self.assertEquals(ob.sells().size(), 0)
+        self.assertEqual(ob.sells().size(), 0)
         
     def test_delete_order_not_in_book(self):
         """
@@ -109,7 +124,7 @@ class TestOrderBook(unittest.TestCase):
         s1 = Order(0, Side.SELL, 7.0, 10)
         s2 = Order(0, Side.SELL, 7.5, 10)
         s3 = Order(0, Side.SELL, 7.5, 10)
-        
+
         ob.insert(s3)
         ob.insert(s2)
         ob.insert(s1)

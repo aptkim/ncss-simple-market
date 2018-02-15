@@ -1,8 +1,8 @@
 from datetime import datetime
 
-from markettypes import Side, Order, Trade, Client
-from orderbook import OrderBook
-from queue import Queue
+from .markettypes import Side, Order, Trade, Client
+from .orderbook import OrderBook
+from .queue import Queue
 
 class Exchange:
     def __init__(self):
@@ -30,7 +30,7 @@ class Exchange:
         """
         if clientid not in self._clients:
             raise RuntimeError("Client is not logged in")
-        
+
         client = self._clients.pop(clientid)
         for order in client.orders:
             self.order_book.delete(order.orderid)
@@ -45,7 +45,7 @@ class Exchange:
         """
         if clientid not in self._clients:
             raise RuntimeError("Client is not logged in")
-        
+
         order = Order(clientid, side, price, volume)
         client = self._clients[clientid]
         queue = self.order_book.buys() if order.side == Side.SELL else self.order_book.sells()
@@ -85,7 +85,7 @@ class Exchange:
 
         client.orders.remove(order[0])
         self.order_book.delete(orderid)
-    
+
     def _in_cross(self, order2, new_order):
         """
         Return True if new_order is in cross with order2, otherwise

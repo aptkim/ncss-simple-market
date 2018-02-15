@@ -33,10 +33,10 @@ class TestExchange(unittest.TestCase):
         """
         ex, clientid = self.exchange, self.client1
         orderid = ex.handle_insert_request(clientid, Side.BUY, 4.5, 10)
-        self.assertEquals(ex.order_book.buys().size(), 1)
-        
+        self.assertEqual(ex.order_book.buys().size(), 1)
+
         order = ex.order_book.buys().peek()
-        self.assertEquals(order.orderid, orderid)
+        self.assertEqual(order.orderid, orderid)
         self.assertIn(order, ex._clients[clientid].orders)
 
     def test_connected_client_delete_own_order(self):
@@ -46,7 +46,7 @@ class TestExchange(unittest.TestCase):
         ex, clientid = self.exchange, self.client1
         orderid = ex.handle_insert_request(clientid, Side.BUY, 4.5, 10)
         ex.handle_delete_request(clientid, orderid)
-        self.assertEquals(ex.order_book.buys().size(), 0)
+        self.assertEqual(ex.order_book.buys().size(), 0)
 
     def test_client_cannot_delete_other_orders(self):
         """
@@ -65,13 +65,13 @@ class TestExchange(unittest.TestCase):
         ex, clientid = self.exchange, self.client1
         o1 = ex.handle_insert_request(clientid, Side.BUY, 5.0, 10)
         o2 = ex.handle_insert_request(clientid, Side.SELL, 7.0, 10)
-        self.assertEquals(len(ex.order_book._orders), 2)
-        self.assertEquals(len(ex._clients[clientid].orders), 2)
-        
+        self.assertEqual(len(ex.order_book._orders), 2)
+        self.assertEqual(len(ex._clients[clientid].orders), 2)
+
         ex.handle_logoff_request(clientid)
-        self.assertEquals(len(ex.order_book._orders), 0)
+        self.assertEqual(len(ex.order_book._orders), 0)
         self.assertNotIn(clientid, ex._clients)
-        
+
     def test_insert_orders_not_in_cross_no_trade(self):
         """
         If inserted orders are not in cross, then they will rest in the order
@@ -80,7 +80,7 @@ class TestExchange(unittest.TestCase):
         ex, c1, c2 = self.exchange, self.client1, self.client2
         o1 = ex.handle_insert_request(c1, Side.BUY, 5.0, 10)
         o2 = ex.handle_insert_request(c2, Side.SELL, 7.0, 10)
-        self.assertEquals(len(ex.trades), 0)
+        self.assertEqual(len(ex.trades), 0)
 
     def test_insert_orders_in_cross_trade_and_removed_from_book(self):
         """
@@ -92,14 +92,14 @@ class TestExchange(unittest.TestCase):
         o1 = ex.handle_insert_request(c1, Side.BUY, 6.0, 10)
         o2 = ex.handle_insert_request(c2, Side.SELL, 6.0, 10)
 
-        self.assertEquals(len(ex.trades), 1)
-        self.assertEquals(ex.trades[0].buyer, ex._clients[c1])
-        self.assertEquals(ex.trades[0].seller, ex._clients[c2])
-        self.assertEquals(ex.trades[0].price, 6.0)
-        self.assertEquals(ex.trades[0].volume, 10)
+        self.assertEqual(len(ex.trades), 1)
+        self.assertEqual(ex.trades[0].buyer, ex._clients[c1])
+        self.assertEqual(ex.trades[0].seller, ex._clients[c2])
+        self.assertEqual(ex.trades[0].price, 6.0)
+        self.assertEqual(ex.trades[0].volume, 10)
 
-        self.assertEquals(ex.order_book.buys().size(), 0)
-        self.assertEquals(ex.order_book.sells().size(), 0)
+        self.assertEqual(ex.order_book.buys().size(), 0)
+        self.assertEqual(ex.order_book.sells().size(), 0)
 
     def test_insert_orders_in_cross_favour_existing_buy_price(self):
         """
@@ -109,7 +109,7 @@ class TestExchange(unittest.TestCase):
         ex, c1, c2 = self.exchange, self.client1, self.client2
         o1 = ex.handle_insert_request(c1, Side.BUY, 6.5, 10)
         o2 = ex.handle_insert_request(c2, Side.SELL, 6.0, 10)
-        self.assertEquals(ex.trades[0].price, 6.5)
+        self.assertEqual(ex.trades[0].price, 6.5)
 
     def test_insert_orders_in_cross_favour_existing_sell_price(self):
         """
@@ -119,7 +119,7 @@ class TestExchange(unittest.TestCase):
         ex, c1, c2 = self.exchange, self.client1, self.client2
         o1 = ex.handle_insert_request(c1, Side.SELL, 6.0, 10)
         o2 = ex.handle_insert_request(c2, Side.BUY, 6.5, 10)
-        self.assertEquals(ex.trades[0].price, 6.0)
+        self.assertEqual(ex.trades[0].price, 6.0)
 
     def test_insert_orders_in_cross_remaining_volume_still_in_book(self):
         """
@@ -129,8 +129,8 @@ class TestExchange(unittest.TestCase):
         ex, c1, c2 = self.exchange, self.client1, self.client2
         o1 = ex.handle_insert_request(c1, Side.BUY, 6.0, 10)
         o2 = ex.handle_insert_request(c2, Side.SELL, 6.0, 5)
-        self.assertEquals(ex.trades[0].volume, 5)
-        self.assertEquals(ex.order_book._orders[o1].volume, 5)
+        self.assertEqual(ex.trades[0].volume, 5)
+        self.assertEqual(ex.order_book._orders[o1].volume, 5)
 
     def test_insert_orders_in_cross_excess_volume_inserted(self):
         """
@@ -141,5 +141,5 @@ class TestExchange(unittest.TestCase):
         ex, c1, c2 = self.exchange, self.client1, self.client2
         o1 = ex.handle_insert_request(c1, Side.BUY, 6.0, 10)
         o2 = ex.handle_insert_request(c2, Side.SELL, 6.0, 15)
-        self.assertEquals(ex.trades[0].volume, 10)
-        self.assertEquals(ex.order_book._orders[o2].volume, 5)
+        self.assertEqual(ex.trades[0].volume, 10)
+        self.assertEqual(ex.order_book._orders[o2].volume, 5)

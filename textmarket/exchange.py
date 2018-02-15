@@ -1,8 +1,8 @@
 from datetime import datetime
 
-from markettypes import Side, Order, Trade, Client
-from orderbook import OrderBook
-from queue import Queue
+from .markettypes import Side, Order, Trade, Client
+from .orderbook import OrderBook
+from .queue import Queue
 
 class Exchange:
     def __init__(self):
@@ -44,7 +44,7 @@ class Exchange:
         inserted by the requesting client.
         """
         pass
-    
+
     def _in_cross(self, order2, new_order):
         """
         Return True if new_order is in cross with order2, otherwise

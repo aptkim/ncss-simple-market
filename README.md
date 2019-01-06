@@ -17,7 +17,7 @@ You can read more about queues on Wikipedia: https://en.wikipedia.org/wiki/Queue
 ```
 git checkout exercise-01
 ```
- - The branch includes an incomplete implementation of a Queue class in textmarket/queue.py, and some unit tests describing how the Queue should behave are in test/test_queue.py.
+ - The branch includes an incomplete implementation of a Queue class in market/queue.py, and some unit tests describing how the Queue should behave are in test/test_queue.py.
  - Run the unit tests, most of which will be failing (refer to the tips on the master branch if you are new to running Python unit tests):
 ```
 python -m unittest discover

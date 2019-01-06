@@ -34,9 +34,9 @@ When matching orders, priority is given to the best price, followed by the order
 ```
 git checkout exercise-02
 ```
- - The branch includes an incomplete implementation of an OrderBook class provided in textmarket/orderbook.py.
+ - The branch includes an incomplete implementation of an OrderBook class provided in market/orderbook.py.
  - Unit tests describing how the OrderBook class should behave are in test/test_orderbook.py.
- - Some additional classes that the OrderBook will need -- including Order and Side -- are in textmarket/markettypes.py.
+ - Some additional classes that the OrderBook will need -- including Order and Side -- are in market/markettypes.py.
  - Run the unit tests, most of which will be failing (refer to the tips on the master branch if you are new to running Python unit tests):
 ```
 python -m unittest discover

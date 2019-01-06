@@ -1,6 +1,6 @@
 import unittest
 
-from textmarket.queue import Queue
+from market.queue import Queue
 
 class TestQueue(unittest.TestCase):
 

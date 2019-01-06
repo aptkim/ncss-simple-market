@@ -1,7 +1,7 @@
 import unittest
 
-from textmarket.markettypes import Side, Order
-from textmarket.orderbook import OrderBook
+from market.markettypes import Side, Order
+from market.orderbook import OrderBook
 
 class TestOrderBook(unittest.TestCase):
 

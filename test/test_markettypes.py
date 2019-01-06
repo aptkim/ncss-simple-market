@@ -1,6 +1,6 @@
 import unittest
 
-from textmarket.markettypes import Side, Order
+from market.markettypes import Side, Order
 
 class TestOrder(unittest.TestCase):
 

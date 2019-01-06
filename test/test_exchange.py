@@ -1,8 +1,8 @@
 import unittest
 
-from textmarket.exchange import Exchange
-from textmarket.markettypes import Client, Side, Order
-from textmarket.orderbook import OrderBook
+from market.exchange import Exchange
+from market.markettypes import Client, Side, Order
+from market.orderbook import OrderBook
 
 class TestExchange(unittest.TestCase):
     def setUp(self):

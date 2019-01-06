@@ -1,5 +1,7 @@
 # Exercise-04
 
+ > This exercise is still **under construction**. If you would like to proceed, please discuss with the teacher.
+
 Convert the Exchange class to act as a single threaded network server using an event loop. Design and generate a structured protocol using Google protocol buffers.
 
 Suitable for advanced students.

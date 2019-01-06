@@ -1,4 +1,4 @@
-# ncss-text-market
+# ncss-simple-market
 
 This is an educational repository providing exercises for students of NCSS attending a master class run by sponsoring company Optiver. It is ideal for students who already have some Python programming skills, including a basic understanding of [classes](https://docs.python.org/3/tutorial/classes.html).
 
@@ -16,12 +16,12 @@ This master class is using [git](https://en.wikipedia.org/wiki/Git), a [version 
 
 However, you don't need to know too much about git to use it for this master class, as you should be able to do everything you need using the commands below. If you would like to learn more about git, please see the Further Reading.
 
- - If you are retrieving the ncss-text-market repository from GitHub for the first time:
+ - If you are retrieving the ncss-simple-market repository from GitHub for the first time:
 ```
-git clone https://github.com/aptkim/ncss-text-market.git
-cd ncss-text-market
+git clone https://github.com/aptkim/ncss-simple-market.git
+cd ncss-simple-market
 ```
- - Once you have cloned the ncss-text-market repository from GitHub, switch to the branch corresponding to the exercise you would like to try:
+ - Once you have cloned the ncss-simple-market repository from GitHub, switch to the branch corresponding to the exercise you would like to try:
 ```
 git checkout exercise-01
 ```
@@ -53,7 +53,7 @@ The output will continue with details of each failing test case. Here is an exam
 FAIL: test_dequeue_from_front_of_queue (test.test_queue.TestQueue)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/Users/kim/Documents/repo/ncss-text-market/test/test_queue.py", line 30, in test_dequeue_from_front_of_queue
+  File "/Users/kim/Documents/repo/ncss-simple-market/test/test_queue.py", line 30, in test_dequeue_from_front_of_queue
     self.assertEqual(q.dequeue(), 10)
 AssertionError: None != 10
 ```

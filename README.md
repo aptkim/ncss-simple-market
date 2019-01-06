@@ -39,9 +39,9 @@ James B 40@10 Kim
 ```
 git checkout exercise-03
 ```
- - The branch includes an incomplete implementation of an Exchange class provided in textmarket/exchange.py.
+ - The branch includes an incomplete implementation of an Exchange class provided in market/exchange.py.
  - Unit tests describing how the Exchange class should behave are in test/test_exchange.py.
- - Some additional classes that the Exchange will need -- including Side, Order, Trade, and Client -- are in textmarket/markettypes.py.
+ - Some additional classes that the Exchange will need -- including Side, Order, Trade, and Client -- are in market/markettypes.py.
  - Run the unit tests, most of which will be failing (refer to the tips on the master branch if you are new to running Python unit tests):
 ```
 python -m unittest discover
